@@ -1,6 +1,8 @@
-Vagrant::DEFAULT_SERVER_URL.replace('https://vagrantcloud.com')
+#Vagrant::DEFAULT_SERVER_URL.replace('https://vagrantcloud.com')
 
 Vagrant.configure("2") do |config|
+
+  config.vm.boot_timeout = 600
 
   config.vm.define "ans" do |ans|
     ans.vm.box = "ubuntu/trusty64"
