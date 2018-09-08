@@ -1,3 +1,4 @@
 .vagrant/
 ansible-playbooks/
 docker-project/
+db_scripts/

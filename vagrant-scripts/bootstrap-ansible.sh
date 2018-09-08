@@ -4,6 +4,7 @@ adduser --gecos "" --disabled-password ansible_user
 echo "ansible_user:Qwerty12" | chpasswd
 adduser ansible_user sudo
 su -m "ansible_user" -c "ssh-keygen -b 2048 -t rsa -f /home/ansible_user/.ssh/id_rsa -N ''"
+printf "Host *\n  ForwardAgent yes\n" > /home/ansible_user/.ssh/config
 
 
 
@@ -15,3 +16,12 @@ apt-get update
 apt-get install ansible -y
 
 
+
+
+echo "------------- Installing git"
+apt-get install git -y
+
+
+
+echo "------------- Restarting ssh"
+service ssh restart
