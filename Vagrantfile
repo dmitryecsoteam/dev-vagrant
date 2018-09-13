@@ -30,4 +30,17 @@ Vagrant.configure("2") do |config|
 	
 	db.vm.provision "shell", privileged: true, path: "./vagrant-scripts/bootstrap-server.sh"
   end
+  
+  config.vm.define "webapp" do |webapp|
+	webapp.vm.box = "ubuntu/trusty64"
+    webapp.vm.hostname = "dev-webapp"
+    webapp.vm.network :private_network, ip: "192.168.0.43", netmask: "255.255.255.0"
+	webapp.vm.network :forwarded_port, guest: 4000, host: 4000
+	
+	webapp.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--cpus", 1, "--memory", "1024"]
+    end
+	
+	webapp.vm.provision "shell", privileged: true, path: "./vagrant-scripts/bootstrap-server.sh"
+  end
 end
